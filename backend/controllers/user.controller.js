@@ -103,6 +103,36 @@ export const verifyOtp = async (req, res) => {
 };
 
 
+export const resendOTP = async(req, res)=>{
+    try {
+        const {email}=req.body;
+        if (!email) {
+            return res.status(400).json({ success: false, message: 'Email is required.' });
+        }
+
+        const user = await User.findOne({ email });
+
+        if(!user) {
+            return res.status(404).json({success:false, message:"Invalid Email"});
+        }
+
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+        user.otp = otp;
+        user.otpExpiresAt = Date.now() + 15 * 60 * 1000; // 15 minutes from now
+        await user.save();
+
+        await sendVerificationEmail(email, otp, user.username);
+
+        return res.status(200).json({ success: true, message: 'OTP resent successfully.' });
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
 
 export const login = async(req, res)=> {
     try {
