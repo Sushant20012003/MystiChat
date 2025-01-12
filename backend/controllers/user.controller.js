@@ -193,7 +193,7 @@ export const search = async(req, res) => {
             return res.status(400).json({ success: false, message: 'Please enter a username'});
         }
 
-        const users = await User.find({username: {$regex: username, $options: 'i'}}).select('username').lean();
+        const users = await User.find({username: {$regex: username, $options: 'i'}, _id:{$ne: req.id}}).select('username').lean();
 
         if(!users) {
             return res.status(404).json({success:false, message: 'No users found'});
