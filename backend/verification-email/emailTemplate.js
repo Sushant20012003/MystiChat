@@ -33,6 +33,8 @@ export const emailTemplate = (otp, username) => `
     <p class="header">Hello ${username},</p>
     <p>Thank you for signing up! Please verify your email address using the OTP below:</p>
     <p class="otp">${otp}</p>
+    <br/><br/>
+    <p>It is valid only for 15 min.</p>
     <p>If you didn’t request this, you can safely ignore this email.</p>
     <p class="footer">Best regards,<br>Confession App </p>
   </div>

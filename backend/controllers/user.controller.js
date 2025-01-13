@@ -206,3 +206,27 @@ export const search = async(req, res) => {
         
     }
 }
+
+
+
+export const deleteUser = async(req, res) => {
+    try {
+        const {email} = req.body;
+
+        if(!email) {
+            return res.status(400).json({ success: false, message: 'Please enter an email'});
+        }
+
+        const user = await User.deleteOne({email});
+
+        if(user.deletedCount === 0) {
+            return res.status(404).json({success:false, message: 'No user found'});
+        }
+        
+        return res.status(200).json({success:true, message: 'User deleted successfully'});
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
