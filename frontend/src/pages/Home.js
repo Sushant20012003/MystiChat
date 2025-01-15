@@ -18,8 +18,8 @@ const Home = () => {
   }, [selectedUser]);
 
   return (
-    <div className="flex w-full h-screen fixed">
-      <div className={`${(displayWidth < 768 && selectedUser) && 'hidden'} w-full md:max-w-[400px] flex flex-col justify-between pl-2 py-2 bg-gradient-to-t from-gray-800 to-gray-950 shadow-xl shadow-black border-r-2 border-gray-900`}>
+    <div className="flex h-screen">
+      <div className={`${(displayWidth < 768 && selectedUser) && 'hidden'} w-[100vw] md:w-[400px] flex flex-col justify-between pl-2 py-2 bg-gradient-to-t from-gray-800 to-gray-950 shadow-xl shadow-black border-r-2 border-gray-900`}>
         <Header />
         <Participants />
 

@@ -10,3 +10,12 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
+
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

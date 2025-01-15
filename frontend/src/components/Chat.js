@@ -35,33 +35,44 @@ export default function Chat() {
         };
       }, [navigate, selectedUser]);
 
-    return (
-        <div className={`md:pl-[400px] ${(!selectedUser && displayWidth < 768) && 'hidden'}`}>
+      return (
+        <div className={`${(!selectedUser && displayWidth < 768) && 'hidden'} w-full `}>
             {
-                selectedUser ?
-                    <div className='flex flex-col justify-between h-screen'>
-                        <div className='flex bg-gradient-to-br from-gray-900 to-gray-800 pl-5 gap-2 items-center py-2 '>
-                            <img className='size-12 rounded-full ' src='https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg' />
-                            <span className='text-white font-medium text-lg'>{selectedUser.username}</span>
+                selectedUser ? (
+                    <div className="flex flex-col justify-between h-[100vh]">
+                        {/* Header */}
+                        <div className="flex bg-gradient-to-br from-gray-900 to-gray-800 pl-5 gap-2 items-center py-2">
+                            <img
+                                className="size-12 rounded-full"
+                                src="https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg"
+                                alt="User Avatar"
+                            />
+                            <span className="text-white font-medium text-lg">{selectedUser.username}</span>
                         </div>
+    
+                        {/* Scrollable Message Component */}
+                        
                         <Message />
-                        <div className='p-2 bg-gray-800'>
-                            <div className=' '>
-                                <EmojiInputWithPicker />
-                            </div>
+            
+    
+                        {/* Footer */}
+                        <div className="flex p-2 bg-gray-800">
+                            <EmojiInputWithPicker />
                         </div>
                     </div>
-                    : <div className='flex justify-center h-screen items-center bg-gradient-to-br from-gray-800 to-pink-950' >
-                        <div className='flex flex-col items-center'>
-                        <FaRegComments size={150} color='gray'  />
-                        <pre className=' ' style={{color:'#94a3b8'}}>
-                            Confess your feelings to your favorite person<br></br>
-                                 <span>{'      '}</span> Chat anonymously . Be respectful!
+                ) : (
+                    <div className="flex justify-center h-screen items-center bg-gradient-to-br from-gray-800 to-pink-950">
+                        <div className="flex flex-col items-center">
+                            <FaRegComments size={150} color="gray" />
+                            <pre style={{ color: '#94a3b8' }}>
+                                Confess your feelings to your favorite person<br />
+                                <span>{'      '}</span> Chat anonymously. Be respectful!
                             </pre>
-                        <p style={{color:'#94a3b8'}}></p>
                         </div>
                     </div>
+                )
             }
         </div>
-    )
+    );
+    
 }

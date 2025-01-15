@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { CiSearch } from "react-icons/ci";
-import { useFindParticipants } from '../hooks/userHooks';
 
 
 export default function SearchUser({users, setUsers}) {

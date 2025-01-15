@@ -12,7 +12,7 @@ export default function MainLayout() {
     <div>
         {
             user &&
-            <div>
+            <div className='flex'>
                 <Home />
                 <Outlet />
             </div>

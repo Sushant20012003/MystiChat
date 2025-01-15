@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import SearchUser from './SearchUser';
-import { useFindParticipants } from '../hooks/userHooks';
 import { useDispatch } from 'react-redux';
 import { setSelectedUser } from '../store/chatSlice';
 
@@ -47,9 +46,9 @@ export default function Participants() {
             <SearchUser users={users} setUsers={setUsers} />
             <div className='flex flex-col overflow-y-auto'>
                 {
-                    users && users.map((user, index) => {
+                    users && users?.map((user, index) => {
                         return (
-                            <div key={index} className='flex gap-2 items-center hover:bg-gray-700 py-2 px-2 rounded-[6px]'>
+                            <div onClick={()=>handleSelectUser(user)} key={index} className='flex gap-2 items-center hover:bg-gray-700 py-2 px-2 rounded-[6px]'>
                                 <img className='size-12 rounded-full ' src='https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg' />
                                 <span className='text-white font-medium text-lg'>{user.username}</span>
                             </div>
@@ -58,15 +57,15 @@ export default function Participants() {
                 }
                 {
                     !users &&
-                    <div className='flex gap-2 items-center hover:bg-gray-700 py-2 px-2 rounded-[6px]'>
+                    <div onClick={()=>dispatch(setSelectedUser({_id:'', username:'IIT Jammu'}))} className='flex gap-2 items-center hover:bg-gray-700 py-2 px-2 rounded-[6px]'>
                         <img className='size-12 rounded-full ' src='https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg' />
                         <span className='text-white font-medium text-lg'>IIT Jammu</span>
                     </div>
                 }
                 {
-                    !users && participants.map((user) => {
+                    !users && participants?.map((user, index) => {
                         return (
-                            <div onClick={()=>handleSelectUser(user)} key={user._id} className='flex gap-2 items-center hover:bg-gray-700 py-2 px-2 rounded-[6px] cursor-pointer' >
+                            <div onClick={()=>handleSelectUser(user)} key={index} className='flex gap-2 items-center hover:bg-gray-700 py-2 px-2 rounded-[6px] cursor-pointer' >
                                 <img className='size-12 rounded-full ' src='https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg' />
                                 <span className='text-white font-medium text-lg'>{user.username}</span>
                             </div>
