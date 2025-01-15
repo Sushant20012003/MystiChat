@@ -105,7 +105,6 @@ const EmojiInputWithPicker = () => {
                 response = await response.json();
 
                 if (response.success) {
-                    dispatch(setMessage(response.newMessage));
                     setText('');
                 }
                 else {
