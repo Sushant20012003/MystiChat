@@ -26,9 +26,14 @@ export default function Message() {
             style={{ backgroundImage: 'url(/message-bg.jpg)' }}
         >
             <div className="flex flex-col gap-3">
+                <div className='flex justify-center text-xs text-gray-400 bg-gray-600 py-1 px-2 rounded-xl mx-auto mt-3 w-fit'>
+                    {
+                        selectedUser._id?<div className='flex flex-col items-center'><span>Automatically delete message</span><span>Older than a day</span></div>:<div className='flex flex-col items-center'><span>Automatically delete message</span><span>Older than 5 hours</span></div>
+                    }
+                </div>
                 {messages?.map((message, index) => (
                     <div key={index}>
-                        <div className={`text-white ${index === 0 && 'pt-3'}`}>
+                        <div className={`text-white`}>
                             <div
                                 className={`flex gap-2 w-full ${
                                     user._id === message.senderId ? 'justify-end' : 'justify-start'

@@ -176,14 +176,14 @@ export const deleteOldGroupMessages = async (req, res) => {
 
 export const deleteOldPersonalMessage = async(req, res) => {
   try {
-    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const sevenDaysAgo = new Date(Date.now() -  24 * 60 * 60 * 1000);
 
     const result = await Message.deleteMany({
       receiverId: { $ne: null },
       createdAt: { $lt: sevenDaysAgo },
       });
 
-      console.log(`${result.deletedCount} personal messages older than 7 days have been deleted.`);
+      console.log(`${result.deletedCount} personal messages older than a days have been deleted.`);
 
   } catch (error) {
     console.log(error);
