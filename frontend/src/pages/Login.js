@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { login } from '../api/authServices';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthUser } from '../store/authSlice';
+import { setAuthUser, setToken } from '../store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import store from '../store/store';
 
@@ -41,6 +41,7 @@ const Login = () => {
        if(response.success) {
           console.log(response);
           dispatch(setAuthUser(response.user));
+          dispatch(setToken(response.token));
           navigate('/');
        }
        else {

@@ -13,15 +13,16 @@ import store from './store/store';
 import { io } from 'socket.io-client';
 import { setSocket } from './store/socketSlice';
 import { setOnlineUsers, setSelectedUser } from './store/chatSlice';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const browserRouter = createBrowserRouter([
   {
     path:'/',
-    element:<MainLayout />,
+    element:<ProtectedRoute><MainLayout /></ProtectedRoute>,
     children: [
       {
         path:'/chat',
-        element:<Chat />
+        element:<ProtectedRoute><Chat /></ProtectedRoute>
       }
     ]
   },

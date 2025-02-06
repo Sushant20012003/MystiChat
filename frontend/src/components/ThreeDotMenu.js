@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { logout } from '../api/authServices';
-import { setAuthUser } from '../store/authSlice';
+import { setAuthUser, setToken } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setAllMessages, setOnlineUsers } from '../store/chatSlice';
 
 export default function ThreeDotMenu() {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +16,15 @@ export default function ThreeDotMenu() {
         setIsOpen((prev) => !prev);
     };
 
-    const handleLogout = async() => {
+    const handleLogout = async () => {
         // Add your logout logic here
         const response = await logout();
-        if(response.success) {
+        if (response.success) {
             console.log(response.message);
             dispatch(setAuthUser(null));
+            dispatch(setToken(null));
+            dispatch(setAllMessages([]));
+            dispatch(setOnlineUsers([]));
             navigate('/login');
         }
     };
@@ -62,7 +66,7 @@ export default function ThreeDotMenu() {
                             Logout
                         </button>
                         {/* Add more options here */}
-                        
+
                     </div>
                 </div>
             )}

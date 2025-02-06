@@ -16,14 +16,14 @@ export const register = async (req, res) => {
     }
 
     //checking if email is acceptable or not
-    // if(!(email.split("@")[1] === "iitjammu.ac.in")) {
-    //     return res.status(400).json({ message: 'Please enter valid IIT Jammu email' });
-    // }
+    if(email.split("@").at(-1) !== "iitjammu.ac.in") {
+        return res.status(400).json({success:false, message: 'Please enter valid IIT Jammu email' });
+    }
 
     //checking if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already exists' });
+      return res.status(400).json({success:false, message: 'Email already exists' });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -87,14 +87,14 @@ export const verifyOtp = async (req, res) => {
 
     user.password=undefined;
 
-    const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'1d'});
+    const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'7d'});
 
     return res.status(200).cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite:'strict',
-        maxAge: 24 * 60 * 60 * 1000 // 1 day
-    }).json({ success: true, message: 'Email verified successfully.', user });
+        maxAge:7 * 24 * 60 * 60 * 1000 // 7 day
+    }).json({ success: true, message: 'Email verified successfully.', user, token });
   
 } catch (error) {
     console.error('Error verifying OTP:', error);
@@ -153,15 +153,15 @@ export const login = async(req, res)=> {
                 return res.status(400).json({ success: false, message: 'Invalid email or password'});
             }
 
-            const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'1d'});
+            const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'7d'});
             user.password = undefined;
 
             return res.status(200).cookie('token', token,{
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite:'strict',
-                maxAge: 24 * 60 * 60 * 1000 // 1 day
-            }).json({ success: true, message: 'Logged in successfully.', user });
+                maxAge: 7 * 24 * 60 * 60 * 1000 // 7 day
+            }).json({ success: true, message: 'Logged in successfully.', user, token });
         }
         else {
             return res.status(400).json({ success: false, message: 'Please verify your email first.'});

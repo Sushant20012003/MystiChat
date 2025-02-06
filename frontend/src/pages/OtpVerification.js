@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import store from '../store/store';
 import { resendOTP, verifyOTP } from '../api/authServices';
 import { useNavigate } from 'react-router-dom';
-import { setAuthUser } from '../store/authSlice';
+import { setAuthUser, setToken } from '../store/authSlice';
 import ReactLoading from 'react-loading';
 
 const OtpVerification = () => {
@@ -47,6 +47,7 @@ const OtpVerification = () => {
     if (response.success) {
       console.log(response.message);
       dispatch(setAuthUser(response.user));
+      dispatch(setToken(response.token));
       navigate('/');
     } else {
       alert(response.message);
@@ -56,7 +57,7 @@ const OtpVerification = () => {
   };
 
   useEffect(()=> {
-    if(user && user.isVerified) {
+    if(user && user?.isVerified) {
         navigate('/');
     }
   }, []);

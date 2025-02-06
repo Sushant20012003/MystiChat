@@ -66,21 +66,8 @@ const Signup = () => {
   };
 
   useEffect(()=> {
-    if(user) {
-        if(!user.isVerified) {
-            deleteUser(user.email).then(response => {
-              if(response.success) {
-                console.log(response.message);
-                dispatch(setAuthUser(null));
-              }
-              else {
-                console.log(response.message);
-              }
-            });
-        }
-        else {
+    if(user && user?.isVerified) {
           navigate('/');
-        }      
     }
   },[])
 
