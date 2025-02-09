@@ -16,9 +16,9 @@ export const register = async (req, res) => {
     }
 
     //checking if email is acceptable or not
-    // if(email.split("@").at(-1) !== "iitjammu.ac.in") {
-    //     return res.status(400).json({success:false, message: 'Please enter valid IIT Jammu email' });
-    // }
+    if(email.split("@").at(-1) !== "iitjammu.ac.in") {
+        return res.status(400).json({success:false, message: 'Please enter valid IIT Jammu email' });
+    }
 
     //checking if user already exists
     const existingUser = await User.findOne({ email });
@@ -87,13 +87,13 @@ export const verifyOtp = async (req, res) => {
 
     user.password=undefined;
 
-    const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'7d'});
+    const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'14d'});
 
     return res.status(200).cookie('mystichat_token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite:'strict',
-        maxAge:7 * 24 * 60 * 60 * 1000 // 7 day
+        maxAge:14 * 24 * 60 * 60 * 1000 // 14 day
     }).json({ success: true, message: 'Email verified successfully.', user, token });
   
 } catch (error) {
@@ -153,14 +153,14 @@ export const login = async(req, res)=> {
                 return res.status(400).json({ success: false, message: 'Invalid email or password'});
             }
 
-            const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'7d'});
+            const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'14d'});
             user.password = undefined;
 
             return res.status(200).cookie('mystichat_token', token,{
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite:'strict',
-                maxAge: 7 * 24 * 60 * 60 * 1000 // 7 day
+                maxAge: 14 * 24 * 60 * 60 * 1000 // 14 day
             }).json({ success: true, message: 'Logged in successfully.', user, token });
         }
         else {
