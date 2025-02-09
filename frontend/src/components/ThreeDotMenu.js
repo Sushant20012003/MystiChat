@@ -21,7 +21,6 @@ export default function ThreeDotMenu() {
         // Add your logout logic here
         const response = await logout();
         if (response.success) {
-            console.log(response.message);
             dispatch(setAuthUser(null));
             dispatch(setToken(null));
             dispatch(setAllMessages([]));

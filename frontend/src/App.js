@@ -61,7 +61,6 @@ function App() {
         //event listening
 
         socketio.on('getOnlineUsers', (users)=>{
-          console.log('fetched online users');
           dispatch(setOnlineUsers(users));
           
         });

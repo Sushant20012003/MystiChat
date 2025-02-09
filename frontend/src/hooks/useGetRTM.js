@@ -24,7 +24,6 @@ export const useGetRTN = () => {
 
         const handleGroupMessage = (newMessage) => {
             dispatch(setMessage(newMessage));
-            console.log("Group message:", newMessage);
         };
 
         // Attach listeners

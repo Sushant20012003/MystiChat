@@ -23,7 +23,6 @@ const useGetAllMessage = async () => {
             }
             
             dispatch(setConversationId(conversationId));
-            console.log(conversationId);
             
 
             try {
