@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setAllMessages } from "../store/chatSlice";
+import { setAllMessages, setConversationId } from "../store/chatSlice";
 import store from "../store/store";
 import { useEffect } from "react";
 import { BASE_URL } from "../api/config";
@@ -10,6 +10,7 @@ const useGetAllMessage = async () => {
     const { selectedUser } = useSelector(store => store.chat);
     const { user } = useSelector(store => store.auth);
 
+    
     useEffect(() => {
         const fetchMessage = async () => {
             let conversationId = "";
@@ -20,8 +21,10 @@ const useGetAllMessage = async () => {
             else {
                 conversationId = `${user._id} to ${selectedUser._id}`
             }
-
+            
+            dispatch(setConversationId(conversationId));
             console.log(conversationId);
+            
 
             try {
                 if (selectedUser._id) {

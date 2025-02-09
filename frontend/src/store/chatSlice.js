@@ -5,7 +5,8 @@ const chatSlice = createSlice({
     initialState:{
         selectedUser:null,
         messages:[],
-        onlineUsers:[]
+        onlineUsers:[],
+        conversationId:null
     },
     reducers:{
         setSelectedUser:(state, action) => {
@@ -19,10 +20,13 @@ const chatSlice = createSlice({
         },
         setOnlineUsers:(state, action) => {
             state.onlineUsers = action.payload;
+        },
+        setConversationId:(state, action) => {
+            state.conversationId = action.payload;
         }
     }
 });
 
 
-export const {setSelectedUser, setAllMessages, setMessage, setOnlineUsers} = chatSlice.actions;
+export const {setSelectedUser, setAllMessages, setMessage, setOnlineUsers, setConversationId} = chatSlice.actions;
 export default chatSlice.reducer;

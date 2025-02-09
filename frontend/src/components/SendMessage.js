@@ -64,7 +64,6 @@ const EmojiInputWithPicker = () => {
             conversationId = `${user._id} to ${selectedUser._id}`
         }
 
-        console.log(conversationId);
 
         if (selectedUser._id) {
             try {

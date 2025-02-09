@@ -75,7 +75,7 @@ export const sendPersonalMessage = async (req, res) => {
 
     const receiverSocketId = getReceiverSocketId(receiverId);
     if (receiverSocketId) {
-      io.to(receiverSocketId).emit('newMessage', newMessage);
+      io.to(receiverSocketId).emit('newMessage', {message:newMessage, conversationId: conversationId});
     }
 
 

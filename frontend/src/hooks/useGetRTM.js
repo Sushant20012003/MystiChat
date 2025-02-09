@@ -5,14 +5,21 @@ import { useDispatch, useSelector } from "react-redux";
 export const useGetRTN = () => {
     const dispatch = useDispatch();
     const { socket } = useSelector(store => store.socketio);
-    const { selectedUser } = useSelector(store => store.chat);
+    const { selectedUser, conversationId } = useSelector(store => store.chat);
+    const { user } = useSelector(state => state.auth);
 
     useEffect(() => {
         if (!socket) return;
 
-        const handlePersonalMessage = (newMessage) => {
-            dispatch(setMessage(newMessage));
-            console.log("Personal message:", newMessage);
+
+        const handlePersonalMessage = (res) => {
+            
+            if (selectedUser?.username === "Unknown") {
+                if(res.conversationId.split(' ')[0] === selectedUser?._id) dispatch(setMessage(res.message));
+            }
+            else {
+                if(res.conversationId.split(' ')[0] === user._id) dispatch(setMessage(res.message));
+            }
         };
 
         const handleGroupMessage = (newMessage) => {
@@ -32,5 +39,5 @@ export const useGetRTN = () => {
             socket.off('newMessage', handlePersonalMessage);
             socket.off('groupMessage', handleGroupMessage);
         };
-    }, [socket, dispatch, selectedUser?._id]);
+    }, [socket, dispatch, selectedUser]);
 };
