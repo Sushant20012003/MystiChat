@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { logout } from '../api/authServices';
 import { setAuthUser, setToken } from '../store/authSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setAllMessages, setOnlineUsers } from '../store/chatSlice';
 
@@ -11,6 +11,7 @@ export default function ThreeDotMenu() {
     const menuRef = useRef(null); // To track the dropdown menu element
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {user} = useSelector(state=>state.auth);
 
     const handleToggle = () => {
         setIsOpen((prev) => !prev);
@@ -59,6 +60,7 @@ export default function ThreeDotMenu() {
                     className="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10 "
                 >
                     <div className=" text-white">
+                        <span className='flex justify-center'>Hi, {user.username}</span>
                         <button
                             onClick={handleLogout}
                             className="w-full px-4 py-2 text-sm  hover:bg-gray-800  hover:text-yellow-600 font-medium focus:outline-none rounded-md"
