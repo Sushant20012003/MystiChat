@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CiSearch } from "react-icons/ci";
+import { BASE_URL } from '../api/config';
 
 
 export default function SearchUser({users, setUsers}) {
@@ -10,7 +11,7 @@ export default function SearchUser({users, setUsers}) {
         const fetchUsers = async()=>{
             if(username) {
                 try {
-                    let response = await fetch('http://localhost:8000/api/auth/search', {
+                    let response = await fetch(`${BASE_URL}/api/auth/search`, {
                         method: 'POST',
                         headers:{
                             'Content-Type': 'application/json',

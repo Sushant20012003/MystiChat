@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAllMessages } from "../store/chatSlice";
 import store from "../store/store";
 import { useEffect } from "react";
+import { BASE_URL } from "../api/config";
 
 const useGetAllMessage = async () => {
 
@@ -24,7 +25,7 @@ const useGetAllMessage = async () => {
 
             try {
                 if (selectedUser._id) {
-                    let response = await fetch(`http://localhost:8000/api/message/get`, {
+                    let response = await fetch(`${BASE_URL}/api/message/get`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ const useGetAllMessage = async () => {
                     }
                 }
                 else {
-                    let response = await fetch(`http://localhost:8000/api/message/all/get`, {
+                    let response = await fetch(`${BASE_URL}/api/message/all/get`, {
                         method: 'GET',
                         credentials: 'include'
                     });

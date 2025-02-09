@@ -14,6 +14,7 @@ import { io } from 'socket.io-client';
 import { setSocket } from './store/socketSlice';
 import { setOnlineUsers, setSelectedUser } from './store/chatSlice';
 import ProtectedRoute from './components/ProtectedRoute';
+import { BASE_URL } from './api/config';
 
 const browserRouter = createBrowserRouter([
   {
@@ -50,7 +51,7 @@ function App() {
 
     useEffect(()=>{
       if(user) {
-        const socketio = io('http://localhost:8000', {
+        const socketio = io(`${BASE_URL}`, {
           query: {
             userId:user._id
           }

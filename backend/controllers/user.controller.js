@@ -16,9 +16,9 @@ export const register = async (req, res) => {
     }
 
     //checking if email is acceptable or not
-    if(email.split("@").at(-1) !== "iitjammu.ac.in") {
-        return res.status(400).json({success:false, message: 'Please enter valid IIT Jammu email' });
-    }
+    // if(email.split("@").at(-1) !== "iitjammu.ac.in") {
+    //     return res.status(400).json({success:false, message: 'Please enter valid IIT Jammu email' });
+    // }
 
     //checking if user already exists
     const existingUser = await User.findOne({ email });
@@ -89,7 +89,7 @@ export const verifyOtp = async (req, res) => {
 
     const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'7d'});
 
-    return res.status(200).cookie('token', token, {
+    return res.status(200).cookie('mystichat_token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite:'strict',
@@ -156,7 +156,7 @@ export const login = async(req, res)=> {
             const token = await jwt.sign({userId:user._id}, process.env.SECRET_KEY,{expiresIn:'7d'});
             user.password = undefined;
 
-            return res.status(200).cookie('token', token,{
+            return res.status(200).cookie('mystichat_token', token,{
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite:'strict',
@@ -177,7 +177,7 @@ export const login = async(req, res)=> {
 
 export const logout = async(req, res)=> {
     try {
-        return res.status(200).clearCookie('token').json({ success: true, message: 'Logged out successfully'});
+        return res.status(200).clearCookie('mystichat_token').json({ success: true, message: 'Logged out successfully'});
     } catch (error) {
         console.log(error);
         

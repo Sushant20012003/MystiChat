@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import store from "../store/store";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "./config";
 
 export const signup = async(formData) => {
     try {
-        let response = await fetch('http://localhost:8000/api/auth/register', {
+        let response = await fetch(`${BASE_URL}/api/auth/register`, {
             method:"POST",
             headers: {
                 'Content-Type':'application/json'
@@ -27,7 +28,7 @@ export const signup = async(formData) => {
 
 export const verifyOTP = async(email, otp) => {
     try {
-        let response = await fetch('http://localhost:8000/api/auth/verify-otp', {
+        let response = await fetch(`${BASE_URL}/api/auth/verify-otp`, {
             method:'POST',
             headers: {
                 'Content-Type':'application/json'
@@ -47,7 +48,7 @@ export const verifyOTP = async(email, otp) => {
 
 export const resendOTP = async(email) => {
     try {
-        let response = await fetch('http://localhost:8000/api/auth/resend-otp', {
+        let response = await fetch(`${BASE_URL}/api/auth/resend-otp`, {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -68,7 +69,7 @@ export const resendOTP = async(email) => {
 
 export const login = async(formData) => {
     try {
-        let response = await fetch('http://localhost:8000/api/auth/login', {
+        let response = await fetch(`${BASE_URL}/api/auth/login`, {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -89,7 +90,7 @@ export const login = async(formData) => {
 
 export const logout = async() => {
     try {
-        let response = await fetch('http://localhost:8000/api/auth/logout', {
+        let response = await fetch(`${BASE_URL}/api/auth/logout`, {
             method:'GET',
             credentials:'include'
         });
@@ -106,7 +107,7 @@ export const logout = async() => {
 
 export const deleteUser = async(email) => {
     try {
-        let response = await fetch('http://localhost:8000/api/auth/delete', {
+        let response = await fetch(`${BASE_URL}/api/auth/delete`, {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

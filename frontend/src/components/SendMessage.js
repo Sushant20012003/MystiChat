@@ -7,6 +7,7 @@ import { VscSend } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import store from "../store/store";
 import { setMessage } from "../store/chatSlice";
+import { BASE_URL } from "../api/config";
 
 
 const EmojiInputWithPicker = () => {
@@ -67,7 +68,7 @@ const EmojiInputWithPicker = () => {
 
         if (selectedUser._id) {
             try {
-                let response = await fetch(`http://localhost:8000/api/message/send/${selectedUser._id}`, {
+                let response = await fetch(`${BASE_URL}/api/message/send/${selectedUser._id}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ const EmojiInputWithPicker = () => {
         }
         else {
             try {
-                let response = await fetch(`http://localhost:8000/api/message/all/send`, {
+                let response = await fetch(`${BASE_URL}/api/message/all/send`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

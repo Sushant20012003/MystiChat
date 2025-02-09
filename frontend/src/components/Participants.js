@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SearchUser from './SearchUser';
 import { useDispatch } from 'react-redux';
 import { setSelectedUser } from '../store/chatSlice';
+import { BASE_URL } from '../api/config';
 
 export default function Participants() {
 
@@ -12,7 +13,7 @@ export default function Participants() {
     useEffect(() => {
         const fetchParticipants = async () => {
             try {
-                let response = await fetch('http://localhost:8000/api/message/find/participants', {
+                let response = await fetch(`${BASE_URL}/api/message/find/participants`, {
                     method: 'GET',
                     credentials: 'include'
                 });
