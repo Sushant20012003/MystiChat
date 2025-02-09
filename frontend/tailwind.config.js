@@ -1,15 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./src/**/*.{html,js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {
-      
-    },
+    extend: {},
   },
   plugins: [
-    require('tailwind-scrollbar-hide'),
+    import("tailwind-scrollbar-hide").then((module) => module.default),
   ],
-}
-
+};
