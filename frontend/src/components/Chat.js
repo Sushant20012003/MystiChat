@@ -7,6 +7,7 @@ import { FaComments } from "react-icons/fa";
 import { FaRegComments } from "react-icons/fa";
 import { setSelectedUser } from '../store/chatSlice';
 import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft } from "react-icons/fa6";
 
 export default function Chat() {
 
@@ -35,19 +36,23 @@ export default function Chat() {
         };
       }, [navigate, selectedUser]);
 
+
       return (
         <div className={`${(!selectedUser && displayWidth < 768) && 'hidden'} w-full `}>
             {
                 selectedUser ? (
                     <div className="flex flex-col justify-between h-[100vh]">
                         {/* Header */}
-                        <div className="flex bg-gradient-to-br from-gray-900 to-gray-800 pl-5 gap-2 items-center py-2">
+                        <div className="flex bg-gradient-to-br from-gray-900 to-gray-800 pl-5 justify-between items-center py-2">
+                            <div className='flex gap-2 items-center'>
                             <img
                                 className="size-12 rounded-full"
                                 src="https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg"
                                 alt="User Avatar"
                             />
                             <span className="text-white font-medium text-lg">{selectedUser.username}</span>
+                            </div>
+                            <FaArrowLeft size={16} color='white' className='mr-3' onClick={()=>dispatch(setSelectedUser(null))} />
                         </div>
     
                         {/* Scrollable Message Component */}
